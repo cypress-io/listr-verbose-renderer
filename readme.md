@@ -55,3 +55,9 @@ Format of the rendered timestamp. Use the [date-fns string format](https://date-
 ## License
 
 MIT © [Sam Verschueren](https://github.com/SamVerschueren)
+
+
+## Changelog
+
+#### 0.4.1 - *(09/04/17)*
+- don't output on DATA events
