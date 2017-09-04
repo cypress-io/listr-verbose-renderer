@@ -15,7 +15,8 @@ const renderHelper = (task, event, options) => {
 			log(`${figures.arrowRight} ${task.output}`);
 		}
 	} else if (event.type === 'DATA') {
-		log(`${figures.arrowRight} ${event.data}`);
+		// dont log anything on data events
+		// log(`${figures.arrowRight} ${event.data}`);
 	} else if (event.type === 'TITLE') {
 		log(`${task.title} [title changed]`);
 	}
