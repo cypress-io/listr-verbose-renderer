@@ -1,7 +1,7 @@
 import {serial as test} from 'ava';
 import Listr from 'listr';
 import format from 'date-fns/format';
-import renderer from '../';
+import renderer from '..';
 import {testOutput} from './fixtures/utils';
 
 const date = format(new Date(), 'DD/MM/YYYY');
@@ -18,7 +18,6 @@ test('task succeeds', async t => {
 	});
 
 	testOutput(t, [
-		'',
 		`[${date}] foo [started]\n`,
 		`[${date}] foo [completed]\n`
 	]);
@@ -27,7 +26,7 @@ test('task succeeds', async t => {
 });
 
 test('task fails', async t => {
-	t.plan(5);
+	t.plan(4);
 
 	const list = new Listr([
 		{
@@ -40,7 +39,6 @@ test('task fails', async t => {
 	});
 
 	testOutput(t, [
-		'',
 		`[${date}] foo [started]\n`,
 		`[${date}] foo [failed]\n`,
 		`[${date}] → Hello World\n`
@@ -48,7 +46,26 @@ test('task fails', async t => {
 
 	try {
 		await list.run();
-	} catch (err) {
-		t.is(err.message, 'Hello World');
+	} catch (error) {
+		t.is(error.message, 'Hello World');
 	}
+});
+
+test('hide timestamp by setting dateFormat to false', async t => {
+	const list = new Listr([
+		{
+			title: 'foo',
+			task: () => Promise.resolve()
+		}
+	], {
+		renderer,
+		dateFormat: false
+	});
+
+	testOutput(t, [
+		'foo [started]\n',
+		'foo [completed]\n'
+	]);
+
+	await list.run();
 });
