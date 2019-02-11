@@ -59,5 +59,8 @@ MIT © [Sam Verschueren](https://github.com/SamVerschueren)
 
 ## Changelog
 
+#### 0.5.0 - *(02/11/19)*
+- pulled in updates from master fork
+
 #### 0.4.1 - *(09/04/17)*
 - don't output on DATA events
